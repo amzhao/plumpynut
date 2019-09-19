@@ -1,0 +1,7 @@
+---
+title: "p8105_hw1_az2356"
+author: "Amelia Zhao"
+date: "9/19/2019"
+output: html_document
+---
+This is my markdown file for Homework 1.
