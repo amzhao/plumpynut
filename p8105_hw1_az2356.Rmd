@@ -4,4 +4,36 @@ author: "Amelia Zhao"
 date: "9/19/2019"
 output: github_document
 ---
-This is my markdown file for Homework 1.
+# This is my markdown file for Homework 1.
+
+# Creating a data frame comprised of:
+  - a random sample of size 8 from a standard Normal distribution
+  - a logical vector indicating whether elements of the sample are greater than 0
+  - a character vector of length 8
+  - a factor vector of length 8, with 3 different factor "levels"
+  
+
+```{r}
+# Loading the tidyverse lib so we can create a dataframe using tibble:
+library(tidyverse)
+
+# Setting the seed so that the random number generator will generate the same numbers each time- keeping things boring and predictable....
+set.seed(10)
+
+# Creating a dataframe as described above:
+hw1p1_df = tibble(
+  x = rnorm (8),
+  over1 = c(x > 0),
+  fruitfamily = c("peach", "apple", "lemon", "banana", "koreanmelon", "cantaloupe", "watermelon", "lime"),
+  sweetness = c("sweet", "sweet", "sour", "sweetish", "sweetish", "sweet", "sweet", "sour")
+)
+
+# Printing the dataframe:
+hw1p1_df
+
+
+# Taking the mean of each variable in the dataframe:
+
+
+
+
