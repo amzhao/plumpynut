@@ -123,7 +123,7 @@ The proportion of cases for which x + y > 1 is 0.218. Since the logical vector w
 Plot colored according to the logical variable:
 ```{r}
 
-ggplot(plotdata, aes(x = x, y = y, color = greater1)) + geom_point()
+plot1 <- ggplot(plotdata, aes(x = x, y = y, color = greater1)) + geom_point()
 
 ggsave
 
