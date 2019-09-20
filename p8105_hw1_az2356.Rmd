@@ -36,7 +36,7 @@ Creating a dataframe as described above:
 
 ```{r}
 hw1p1_df = tibble(
-  numbers = rnorm (8),
+  numbers = rnorm(8),
   over1 = c(numbers > 0),
   fruitfamily = c("peach", "apple", "lemon", "banana", "koreanmelon", "cantaloupe", "watermelon", "lime"),
   sweetness = factor(c("sweet", "sweet", "sour", "sweetish", "sweetish", "sweet", "sweet", "sour"))
@@ -61,6 +61,93 @@ mean(pull(hw1p1_df, sweetness))
 Only the mean for the numeric and logical vectors will run. Complex vectors such as factor and character cannot have their means calculated, they can only be trimmed. 
 
 
+Converting variables from logical, character, and factor to numeric. 
+```{r}
+
+over1 <- as.numeric(pull(hw1p1_df, over1))
+fruitfamily <- as.numeric(pull(hw1p1_df, fruitfamily))
+sweetness <- as.numeric(pull(hw1p1_df, sweetness))
+
+```
+The character vector cannot be converted into a numeric vector because there is no numeric variable to associate with it. For the logical vector, as.numeric makes it 0 if false, and 1 if true. For the factor vector, as.numeric outputs the underlying numeric representation. 
+For the logical vector, these values are what are used for the mean calculation. For the factor vector, R assigns values when we ask it to, but will not otherwise because these can be misleading/meaningless values. 
+
+
+Converting and multiplying vectors:
+
+```{r}
+
+overnum <- as.numeric(pull(hw1p1_df, over1))
+pull(hw1p1_df, numbers)*overnum
+
+overfactor <- as.factor(pull(hw1p1_df, over1)) 
+pull(hw1p1_df, numbers)*overfactor
+
+overnum2 <- as.numeric(as.factor(pull(hw1p1_df,over1)))
+overnum2*pull(hw1p1_df, numbers)
+
+```
+
+
 # Question 2
+
+
+```{r}
+set.seed(600)
+plotdata = tibble(
+  x = rnorm(500),
+  y = rnorm(500),
+  greater1 = c((x + y) > 1),
+  numvec = as.numeric(greater1),
+  facvec = as.factor(numvec)
+)
+
+plotdata
+
+nrow(plotdata)
+ncol(plotdata)
+
+mean(pull(plotdata,x))
+median(pull(plotdata, x))
+sd(pull(plotdata,x))
+
+mean(pull(plotdata,numvec))
+
+```
+The data frame contains 500 rows and 5 columns. 
+The x variable's mean is -0.028, median is -0.0559, and standard deviation is 0.989
+
+The proportion of cases for which x + y > 1 is 0.218. Since the logical vector will be returned as 1 (true) or 0 (false), so the mean will equal the number of true values (1 in numvec) over the total number of values. 
+
+
+Plot colored according to the logical variable:
+```{r}
+
+ggplot(plotdata, aes(x = x, y = y, color = greater1)) + geom_point()
+
+ggsave
+
+```
+
+Plot colored according to the numeric variable:
+```{r}
+
+ggplot(plotdata, aes(x = x, y = y, color = numvec)) + geom_point()
+
+```
+
+
+Plot colored according to the factor variable:
+```{r}
+
+ggplot(plotdata, aes(x = x, y = y, color = facvec)) + geom_point()
+
+```
+
+
+The color scales are similar for the logical and factor variables because they are whole integers of essentially presence (1, true) or absence (0, false). The numeric variable can vary and so the color scale in the key has a gradient. However, the color in the plot is still the color for 1 or 0 because it can only be that x + y > 1 or not. 
+
+
+
 
 
